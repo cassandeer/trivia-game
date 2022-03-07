@@ -1,4 +1,17 @@
 * {
     box-sizing: border-box;
+    font-family: 'Karla', sans-serif;
+    background-color: aqua;
+}
+
+body {
+    font-family: 'Karla', sans-serif;
+    background-color: aqua;
+}
+
+.start--menu{
+    display:flex;
+    color: #293264;
+    font-family: 'Karla', sans-serif;
 }
 
