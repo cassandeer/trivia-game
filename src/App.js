@@ -5,7 +5,8 @@ export default function App(){
 
 
 
-    return(<div>
+    return(
+    <div>
         <Start />
         
     </div>
