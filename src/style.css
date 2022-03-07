@@ -1,12 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: 'Karla', sans-serif;
-    background-color: aqua;
-}
-
-body {
-    font-family: 'Karla', sans-serif;
-    background-color: aqua;
+    background-color: #293264;
 }
 
 .start--menu{
