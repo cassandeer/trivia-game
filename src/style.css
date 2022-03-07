@@ -1,5 +1,57 @@
 * {
     box-sizing: border-box;
-    background-color: #293264;
+}
+
+body {
+    background-color:#293264 ;
+}
+
+.start--menu{
+    margin: 100px;
+    padding-top: 150px;
+    width: 550px;
+    height: 550px;
+    color: #293264;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+
+
+.start--menu > button {
+    border:0px;
+    width: 193px;
+    height: 52px;
+    color: #F5F7FB;
+    background-color: #4D5B9E;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+}
+
+.start--menu > h1 {
+    font-family: 'Karla', sans-serif;
+}
+
+.start--description{
+    font-family: 'Inter', sans-serif;
+    width: 400px;
+    font-size: small;
+    text-align: center;
+}
+
+.quizz--font{
+    padding: 50px;
+    width: 550px;
+    height: 550px;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    font-family: 'Karla', sans-serif;
+    color: #293264;
+    font-size: 16px;
 }
 
