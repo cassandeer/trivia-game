@@ -22,7 +22,7 @@ body {
 
 
 
-.start--menu > button {
+.quizz--button {
     border:0px;
     width: 193px;
     height: 52px;
@@ -45,13 +45,55 @@ body {
 }
 
 .quizz--font{
-    padding: 50px;
-    width: 550px;
-    height: 550px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    min-width: 500px;
+    height: 600px;
+    max-width: 700px;
     border-radius: 10px;
     background-color: antiquewhite;
     font-family: 'Karla', sans-serif;
     color: #293264;
-    font-size: 16px;
 }
 
+.delimiter{
+    border-top: #DBDEF0;
+    border-radius: 5px;
+}
+
+.answer--list{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.answer{
+    border: solid 1px #4D5B9E;
+    padding: 5px;
+    min-width:66px;
+    min-height: 21px;
+    border-radius: 8px;
+    align-items: center;
+    align-content: center;
+    color: #293264;
+    font-size:13px;
+    text-align: center;
+    cursor:pointer;
+}
+
+.selected--answer{
+    padding: 5px;
+    min-width:66px;
+    min-height: 21px;
+    border-radius: 8px;
+    align-items: center;
+    align-content: center;
+    color: #293264;
+    background-color: #D6DBF5;
+    font-size:13px;
+    text-align: center;
+    cursor:pointer;
+}
