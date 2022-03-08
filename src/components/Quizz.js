@@ -2,16 +2,21 @@ import React from "react"
 
 export default function Quizz(props){
 
-    let shuffledAnswerList = props.answers
-        .map(value => ({ value, sort: Math.random() }))
-        .sort((a, b) => a.sort - b.sort)
-        .map(({ value }) => value)
+    let shuffledAnswerList = props.answers.sort(function(a,b){return Math.random() - 0.5})
 
-    const answers = shuffledAnswerList.map(item => {
-        return <div className="answer" >{item.answer}</div>
+    console.log(shuffledAnswerList)
+    /*.map(value => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value)*/
+
+    const answers = props.answers.map(item => {
+        return <div 
+            className={item.id in props.selection? "selected--answer":"answer" }
+            onClick={() => props.selectAnswer(item.id)}
+            > {item.answer}</div>
     })
 
-    console.log(answers)
+    //console.log(answers)
 
     return(
         <div className="quizz-question">

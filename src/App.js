@@ -9,6 +9,7 @@ export default function App(){
     const [startMenu, setStartMenu] = React.useState(true)
     const [rawData, setRawData] = React.useState([])
     const [data, setData] = React.useState([])
+    const [selection, setSelection] = React.useState([])
 
     function startQuizz(){
         setStartMenu(!startMenu)
@@ -16,32 +17,28 @@ export default function App(){
 
     React.useEffect( () => {
         fetch("https://opentdb.com/api.php?amount=1&encode=base64")
-                .then(res => res.json())
-                .then(item => item.results.map( element => ({
-                    ...element,
-                    id: nanoid()
-                })))
-                .then(quest => setRawData(quest.results))
+            .then(res => res.json())
+            .then(quest => setRawData(quest.results))
         
-        /*setData(() =>  rawData.map(item => ({
+        setData(() =>  rawData.map(item => ({
             ...item,
             id: nanoid(),
-            allAnswers: null,
+            allAnswers: [].concat(item.incorrect_answers.map(element => ({
+                answer: window.atob(element),
+                id: nanoid(),
+            }))).concat({answer: window.atob(item.correct_answer), id: nanoid()}),
         })))
-
-        setData(oldData => oldData.map( item =>({
-            ...item,
-            allAnswers: item.incorrect_answers.map(proposition => ({
-                answer: window.atob(proposition),
-                isSelected: false,
-                id: nanoid(),}))
-                .push({answer: window.atob(item.correct_answer), isSelected: false, id: nanoid()}),
-
-        })))*/
-            },[startGame])
+    }, [startMenu])
 
     
-    console.log(rawData)
+    console.log(data)
+
+    function selectAnswer(id){
+        setSelection(prevSelection => (id in prevSelection)?
+            prevSelection.splice(prevSelection.indexOf(id, 1)) :
+            prevSelection.concat(id)      
+        )
+    }
     
     
     const quizz = data.map(item => {
@@ -49,6 +46,9 @@ export default function App(){
                 key={item.id} 
                 question={window.atob(item.question)}
                 correctAnswer={window.atob(item.correct_answer)}
+                answers={item.allAnswers}
+                selectAnswer={selectAnswer}
+                selection={selection}
             />
         })
 
