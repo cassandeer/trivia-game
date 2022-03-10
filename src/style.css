@@ -7,20 +7,29 @@ body {
 }
 
 .start--menu{
-    margin: 100px;
-    padding-top: 150px;
+    position: absolute;
     width: 550px;
     height: 550px;
-    color: #293264;
+    left: 95px;
+    top: 112px;
+    background: #F5F7FB;
     border-radius: 10px;
-    background-color: antiquewhite;
     display:flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
+    padding-top: 150px;
+    color: #293264;
 }
 
-
+.start--menu > h1 {
+    font-family: Karla;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 31.25px;
+    line-height: 37px;
+    text-align: center;
+}
 
 .quizz--button {
     border:0px;
@@ -45,15 +54,14 @@ body {
 }
 
 .quizz--font{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 50px;
-    padding-right: 50px;
-    min-width: 500px;
-    height: 600px;
-    max-width: 700px;
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    left: 95px;
+    top: 112px;
+    padding: 40px;
     border-radius: 10px;
-    background-color: antiquewhite;
+    background-color: #F5F7FB;
     font-family: 'Karla', sans-serif;
     color: #293264;
 }
@@ -97,3 +105,38 @@ body {
     text-align: center;
     cursor:pointer;
 }
+
+.good--answer{
+    padding: 5px;
+    min-width:66px;
+    min-height: 21px;
+    border-radius: 8px;
+    align-items: center;
+    align-content: center;
+    color: #293264;
+    background-color: #94D7A2;
+    font-size:13px;
+    text-align: center;
+    cursor:pointer;
+}
+
+.bad--answer{
+    padding: 5px;
+    min-width:66px;
+    min-height: 21px;
+    border-radius: 8px;
+    align-items: center;
+    align-content: center;
+    color: #293264;
+    background-color: #F8BCBC;
+    font-size:13px;
+    text-align: center;
+    cursor:pointer;
+}
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
