@@ -14,11 +14,13 @@ export default function App(){
     const [selectMode, setSelectMode] = React.useState(true)
     const [score, setScore] = React.useState(0)
 
+    //to launch the very first game
     function startQuizz(){
         setStartMenu(!startMenu)
         setStartGame(prevGame => !prevGame)
     }
 
+    //API call and data downloading
     React.useEffect( () => {
         fetch("https://opentdb.com/api.php?amount=3&encode=base64")
             .then(res => res.json())
@@ -47,12 +49,12 @@ export default function App(){
         
     }, [startGame])
 
+    //to get the score when clicking on "check answers" button
     React.useEffect(() =>{
         getScore()
     },[selectMode])
 
-    console.log(data)
-
+    //set selection state with all selected values
     function selectedAnswer(id, questionId){
 
         if(selectMode){
@@ -76,6 +78,7 @@ export default function App(){
             }}         
     }
 
+    //to set up Quizz components
     const quizz = data.map(item => {
             return <Quizz 
                 key={item.id}
@@ -89,10 +92,12 @@ export default function App(){
             />
         })
     
+    //to freeze answer selection when checking answers  
     function clickCheckAnswers(){
         setSelectMode(false)
     }
 
+    //function to calculate the score
     function getScore(){
         for(const element of selection){
             for(const item of data){
@@ -104,6 +109,7 @@ export default function App(){
         return score
     }
 
+    //function to launch a new game by resetting all states
     function playAgain(){
         setRawData([])
         setData([])
@@ -112,7 +118,7 @@ export default function App(){
         setSelectMode(true)
         setStartGame(prevGame => !prevGame)
     }
-    console.log(data)    
+        
     return(
     <div>
         {startMenu && <Start startQuizz={startQuizz}/>}
