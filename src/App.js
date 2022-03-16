@@ -56,26 +56,24 @@ export default function App(){
 
     //set selection state with all selected values
     function selectedAnswer(id, questionId){
-
         if(selectMode){
             for(const element of data){
                 if(element.id === questionId){
                     const allAnswers = element.allAnswers
-
-                for(const item of allAnswers){
-                    if(selection.indexOf(item.id) in selection && !(selection.indexOf(id) in selection)){
+                    for(const item of allAnswers){
+                        if(selection.indexOf(item.id) in selection && !(selection.indexOf(id) in selection)){
                             setSelection(prevSelection => prevSelection.filter(sel => sel != item.id))
                             setSelection(prevSelection => prevSelection.concat(id))
-                    }
-                } 
-                if(selection.indexOf(id) in selection){
-                        setSelection(prevSelection => prevSelection.filter(sel => sel != id))
-                    }
-                    else{
-                        setSelection(prevSelection => prevSelection.concat(id))
+                        }
                     } 
+                if(selection.indexOf(id) in selection){
+                    setSelection(prevSelection => prevSelection.filter(sel => sel != id))
                 }
-            }}         
+                else{
+                    setSelection(prevSelection => prevSelection.concat(id))
+                }}
+            }
+        }         
     }
 
     //to set up Quizz components
@@ -122,12 +120,12 @@ export default function App(){
     return(
     <div>
         {startMenu && <Start startQuizz={startQuizz}/>}
-        {!selectMode && <Confetti />}
+        {!selectMode && (score>1) && <Confetti />}
         {!startMenu && 
             <div className="quizz--font">
                 {quizz}
-                { selectMode && <button className="quizz--button" onClick={clickCheckAnswers}><h3>Check answers</h3></button>}
-                { !selectMode && 
+                {selectMode && <button className="quizz--button" onClick={clickCheckAnswers}><h3>Check answers</h3></button>}
+                {!selectMode && 
                     <div className="footer">
                     <button className="quizz--button" onClick={playAgain} ><h3>Play again</h3></button>
                     <p>Your score: {score}/3</p></div>
