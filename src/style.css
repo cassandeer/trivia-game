@@ -4,10 +4,10 @@
 
 body {
     background-color:#293264 ;
+    display: flex;
 }
 
 .start--menu{
-    position: absolute;
     width: 550px;
     height: 550px;
     left: 95px;
@@ -54,7 +54,6 @@ body {
 }
 
 .quizz--font{
-    position: absolute;
     width: 550px;
     height: 550px;
     left: 95px;
@@ -63,7 +62,6 @@ body {
     border-radius: 10px;
     background-color: #F5F7FB;
     font-family: 'Karla', sans-serif;
-    color: #293264;
 }
 
 .delimiter{

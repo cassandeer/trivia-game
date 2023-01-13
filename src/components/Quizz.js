@@ -7,7 +7,7 @@ export default function Quizz(props){
             className= {((props.selectMode) && (props.selection.indexOf(item.id) in props.selection))? "selected--answer": 
                 (props.selectMode)? "answer":
                 (!props.selectMode && item.answer === props.correctAnswer) ? "good--answer": 
-                (!props.selectMode && item.answer != props.correctAnswer && props.selection.indexOf(item.id) in props.selection ) ? "bad--answer":
+                (!props.selectMode && item.answer !== props.correctAnswer && props.selection.indexOf(item.id) in props.selection ) ? "bad--answer":
                 "answer"}
                 
             onClick={() => {props.selectedAnswer(item.id, props.id);}}> 

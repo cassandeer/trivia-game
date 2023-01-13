@@ -1,4 +1,4 @@
-import React from "react"
+import React,{ useState, useEffect } from "react"
 import Start from "./components/Start.js"
 import Quizz from "./components/Quizz.js"
 import {nanoid} from "nanoid"
@@ -13,6 +13,8 @@ export default function App(){
     const [selection, setSelection] = React.useState([])
     const [selectMode, setSelectMode] = React.useState(true)
     const [score, setScore] = React.useState(0)
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
 
     //to launch the very first game
     function startQuizz(){
@@ -25,6 +27,7 @@ export default function App(){
         fetch("https://opentdb.com/api.php?amount=3&encode=base64")
             .then(res => res.json())
             .then(quest => setRawData(quest.results))
+        console.log(rawData)    
         
         setData(() =>  rawData.map(item => ({
             ...item,
@@ -62,12 +65,12 @@ export default function App(){
                     const allAnswers = element.allAnswers
                     for(const item of allAnswers){
                         if(selection.indexOf(item.id) in selection && !(selection.indexOf(id) in selection)){
-                            setSelection(prevSelection => prevSelection.filter(sel => sel != item.id))
+                            setSelection(prevSelection => prevSelection.filter(sel => sel !== item.id))
                             setSelection(prevSelection => prevSelection.concat(id))
                         }
                     } 
                 if(selection.indexOf(id) in selection){
-                    setSelection(prevSelection => prevSelection.filter(sel => sel != id))
+                    setSelection(prevSelection => prevSelection.filter(sel => sel !== id))
                 }
                 else{
                     setSelection(prevSelection => prevSelection.concat(id))
@@ -109,29 +112,58 @@ export default function App(){
 
     //function to launch a new game by resetting all states
     function playAgain(){
-        setRawData([])
-        setData([])
+        setStartGame(prevGame => !prevGame)
         setSelection([])
         setScore(0)
         setSelectMode(true)
-        setStartGame(prevGame => !prevGame)
+        
+    }
+      
+    useEffect(() => {
+        setWidth(window.innerWidth);
+        setHeight(window.innerHeight);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    
+    const handleResize = () => {
+        setWidth(window.innerWidth);
+        setHeight(window.innerHeight);
     }
         
     return(
-    <div>
-        {startMenu && <Start startQuizz={startQuizz}/>}
-        {!selectMode && (score>1) && <Confetti />}
-        {!startMenu && 
-            <div className="quizz--font">
-                {quizz}
-                {selectMode && <button className="quizz--button" onClick={clickCheckAnswers}><h3>Check answers</h3></button>}
-                {!selectMode && 
-                    <div className="footer">
-                    <button className="quizz--button" onClick={playAgain} ><h3>Play again</h3></button>
-                    <p>Your score: {score}/3</p></div>
-                }
-            </div>
-        }
-    </div>
+        <div>
+            {startMenu && 
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: height,
+                    width: width
+                }}>
+                    <Start startQuizz={startQuizz}/>
+                </div>
+            }
+            {!selectMode && (score>1) && <Confetti />}
+            {!startMenu && 
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: height,
+                    width: width
+                }}>
+                    <div className="quizz--font">
+                        {quizz}
+                        {selectMode && <button className="quizz--button" onClick={clickCheckAnswers}><h3>Check answers</h3></button>}
+                        {!selectMode && 
+                            <div className="footer">
+                            <button className="quizz--button" onClick={playAgain} ><h3>Play again</h3></button>
+                            <p>Your score: {score}/3</p></div>
+                        }
+                    </div>
+                </div>    
+            }
+        </div>
     )
 }
